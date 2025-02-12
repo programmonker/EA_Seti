@@ -9,11 +9,6 @@ namespace lab1
         public Form1()
         {
             InitializeComponent();
-            for (int i = 32; i < 256; i++)
-            {
-                if (i == 127 || i == 151 || i == 159 || i == 172) continue;
-                code[i] = values[i - 32];
-            }
         }
 
         private void encodeButton_Click(object sender, EventArgs e)
@@ -27,14 +22,14 @@ namespace lab1
                 {
                     var myKey = code.FirstOrDefault(x => x.Value == c).Key;
                     output += myKey + " ";
-                    outputSecond += Convert.ToString(myKey,2) + " ";
+                    outputSecond += Convert.ToString(myKey, 2) + " ";
                 }
                 outputBox.Text = output + "\n" + outputSecond;
                 record("Сообщение " + input + " закодировано в ", $"{output} [{outputSecond}]");
             }
-            catch 
-            { 
-                record("Сообщение не удалось" ," закодировать");
+            catch
+            {
+                record("Сообщение не удалось", " закодировать");
             }
 
         }
@@ -51,7 +46,7 @@ namespace lab1
                     output += code[Int32.Parse(c)];
                 }
                 outputBox.Text = output;
-                record("Сообщение " + input + " раскодировано в ", output);
+                record("Сообщение " + input + " раскодировано в ", $"{output}");
             }
             catch
             {
@@ -69,6 +64,15 @@ namespace lab1
                 historyBox.Text = "В поле ввода пусто" + "\n" + historyBox.Text;
             }
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            for (int i = 32; i < 256; i++)
+            {
+                if (i == 127 || i == 151 || i == 159 || i == 172) continue;
+                code[i] = values[i - 32];
+            }
         }
     }
 }
