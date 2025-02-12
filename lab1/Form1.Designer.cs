@@ -28,33 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
+            encodeButton = new Button();
+            decodeButton = new Button();
             label1 = new Label();
             label2 = new Label();
             inputBox = new RichTextBox();
             outputBox = new RichTextBox();
+            historyBox = new RichTextBox();
             SuspendLayout();
             // 
-            // button1
+            // encodeButton
             // 
-            button1.Location = new Point(320, 43);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            encodeButton.Location = new Point(320, 43);
+            encodeButton.Name = "encodeButton";
+            encodeButton.Size = new Size(75, 23);
+            encodeButton.TabIndex = 0;
+            encodeButton.Text = "button1";
+            encodeButton.UseVisualStyleBackColor = true;
+            encodeButton.Click += encodeButton_Click;
             // 
-            // button2
+            // decodeButton
             // 
-            button2.Location = new Point(320, 95);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 1;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            decodeButton.Location = new Point(320, 95);
+            decodeButton.Name = "decodeButton";
+            decodeButton.Size = new Size(75, 23);
+            decodeButton.TabIndex = 1;
+            decodeButton.Text = "button2";
+            decodeButton.UseVisualStyleBackColor = true;
+            decodeButton.Click += decodeButton_Click;
             // 
             // label1
             // 
@@ -91,17 +92,26 @@
             outputBox.TabIndex = 6;
             outputBox.Text = "";
             // 
+            // historyBox
+            // 
+            historyBox.Location = new Point(12, 248);
+            historyBox.Name = "historyBox";
+            historyBox.Size = new Size(710, 190);
+            historyBox.TabIndex = 7;
+            historyBox.Text = "";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(734, 450);
+            Controls.Add(historyBox);
             Controls.Add(outputBox);
             Controls.Add(inputBox);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(decodeButton);
+            Controls.Add(encodeButton);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -110,11 +120,12 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
+        private Button encodeButton;
+        private Button decodeButton;
         private Label label1;
         private Label label2;
         private RichTextBox inputBox;
         private RichTextBox outputBox;
+        private RichTextBox historyBox;
     }
 }
