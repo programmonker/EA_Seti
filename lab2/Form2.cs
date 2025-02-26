@@ -25,5 +25,11 @@ namespace lab2
             Form1 newForm = new Form1(this, Int32.Parse(portTextBox.Text), usernameTextBox.Text, writer);
             newForm.Show();
         }
+
+        private void usernameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+            usernameTextBox.Text = usernameTextBox.Text.Replace(" ", "");
+        }
     }
 }
