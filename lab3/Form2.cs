@@ -22,7 +22,7 @@ namespace lab3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 newForm = new Form1(this, Int32.Parse(portTextBox.Text), usernameTextBox.Text, writer);
+            Form1 newForm = new Form1(this, usernameTextBox.Text, writer);
             newForm.Show();
         }
 
