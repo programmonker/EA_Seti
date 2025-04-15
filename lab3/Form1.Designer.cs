@@ -50,6 +50,7 @@
             inputBox.Size = new Size(415, 38);
             inputBox.TabIndex = 5;
             inputBox.Text = "";
+            inputBox.KeyDown += inputBox_KeyDown;
             // 
             // historyBox
             // 
