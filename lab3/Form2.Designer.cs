@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            portTextBox = new TextBox();
+            ipTextBox = new TextBox();
             usernameTextBox = new TextBox();
             submittButton = new Button();
             label1 = new Label();
@@ -37,10 +37,10 @@
             // 
             // portTextBox
             // 
-            portTextBox.Location = new Point(132, 37);
-            portTextBox.Name = "portTextBox";
-            portTextBox.Size = new Size(100, 23);
-            portTextBox.TabIndex = 0;
+            ipTextBox.Location = new Point(132, 37);
+            ipTextBox.Name = "portTextBox";
+            ipTextBox.Size = new Size(100, 23);
+            ipTextBox.TabIndex = 0;
             // 
             // usernameTextBox
             // 
@@ -65,9 +65,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(220, 15);
+            label1.Size = new Size(113, 15);
             label1.TabIndex = 3;
-            label1.Text = "Введите порт для приема сообщений: ";
+            label1.Text = "Введите ip сервера:";
             // 
             // label2
             // 
@@ -87,7 +87,7 @@
             Controls.Add(label1);
             Controls.Add(submittButton);
             Controls.Add(usernameTextBox);
-            Controls.Add(portTextBox);
+            Controls.Add(ipTextBox);
             Name = "Form2";
             Text = "Form2";
             ResumeLayout(false);
@@ -96,7 +96,7 @@
 
         #endregion
 
-        private TextBox portTextBox;
+        private TextBox ipTextBox;
         private TextBox usernameTextBox;
         private Button submittButton;
         private Label label1;

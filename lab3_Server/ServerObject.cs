@@ -1,10 +1,16 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Net.Sockets;
 
 class ServerObject
 {
     TcpListener tcpListener = new TcpListener(IPAddress.Any, 8888); // сервер для прослушивания
     List<ClientObject> clients = new List<ClientObject>(); // все подключения
+    string writerPath;
+    public ServerObject(string path)
+    {
+        writerPath = path;
+    }
     protected internal void RemoveConnection(string id)
     {
         // получаем по id закрытое подключение
@@ -43,6 +49,10 @@ class ServerObject
     // трансляция сообщения подключенным клиентам
     protected internal async Task BroadcastMessageAsync(string message, string id)
     {
+        using (StreamWriter writer = new StreamWriter(writerPath, true))
+        {
+            writer.WriteLine(message);
+        }
         foreach (var client in clients)
         {
             if (client.Id != id) // если id клиента не равно id отправителя

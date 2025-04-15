@@ -13,18 +13,19 @@ namespace lab3
         string values = " \r\n!\r\n\"\r\n#\r\n$\r\n%\r\n&\r\n'\r\n(\r\n)\r\n*\r\n+\r\n,\r\n-\r\n.\r\n/\r\n0\r\n1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n:\r\n;\r\n<\r\n=\r\n>\r\n?\r\n@\r\nA\r\nB\r\nC\r\nD\r\nE\r\nF\r\nG\r\nH\r\nI\r\nJ\r\nK\r\nL\r\nM\r\nN\r\nO\r\nP\r\nQ\r\nR\r\nS\r\nT\r\nU\r\nV\r\nW\r\nX\r\nY\r\nZ\r\n[\r\n\\\r\n]\r\n^\r\n_\r\n`\r\na\r\nb\r\nc\r\nd\r\ne\r\nf\r\ng\r\nh\r\ni\r\nj\r\nk\r\nl\r\nm\r\nn\r\no\r\np\r\nq\r\nr\r\ns\r\nt\r\nu\r\nv\r\nw\r\nx\r\ny\r\nz\r\n{\r\n|\r\n}\r\n~\r\n0\r\n€\r\n\r\n‚\r\nƒ\r\n„\r\n…\r\n†\r\n‡\r\nˆ\r\n‰\r\nŠ\r\n‹\r\nŒ\r\n\r\nŽ\r\n\r\n€\r\n‘\r\n’\r\n“\r\n”\r\n•\r\n–\r\n—\r\n0\r\n™\r\nš\r\n›\r\nœ\r\n\r\nž\r\nŸ\r\n0\r\n¡\r\n¢\r\n£\r\n¤\r\n¥\r\n¦\r\n§\r\n¨\r\n©\r\nª\r\n«\r\n¬\r\n0\r\n®\r\n¯\r\n°\r\n±\r\n²\r\n³\r\n´\r\nµ\r\n¶\r\n·\r\n¸\r\n¹\r\nº\r\n»\r\n¼\r\n½\r\n¾\r\n¿\r\nÀ\r\nÁ\r\nÂ\r\nÃ\r\nÄ\r\nÅ\r\nÆ\r\nÇ\r\nÈ\r\nÉ\r\nÊ\r\nË\r\nÌ\r\nÍ\r\nÎ\r\nÏ\r\nÐ\r\nÑ\r\nÒ\r\nÓ\r\nÔ\r\nÕ\r\nÖ\r\n×\r\nØ\r\nÙ\r\nÚ\r\nÛ\r\nÜ\r\nÝ\r\nÞ\r\nß\r\nà\r\ná\r\nâ\r\nã\r\nä\r\nå\r\næ\r\nç\r\nè\r\né\r\nê\r\në\r\nì\r\ní\r\nî\r\nï\r\nð\r\nñ\r\nò\r\nó\r\nô\r\nõ\r\nö\r\n÷\r\nø\r\nù\r\nú\r\nû\r\nü\r\ný\r\nþ\r\nÿ\r\n".Replace("\r\n", "");
         
         TcpClient client = new TcpClient();
-        int localPort;
         string username;
+        string writePath;
+        string host;
         Form2 Form2 { get; set; }
-        StreamWriter writer;
-        StreamWriter writer2;
-        public Form1(Form2 f, string user, StreamWriter writerN)
+        StreamWriter netWriter;
+        public Form1(Form2 f, string user, string path, string hostie)
         {
             InitializeComponent();
             f.Hide();
             Form2 = f;
             username = user;
-            writer = writerN;
+            writePath = path;
+            host = hostie;
         }
         public Form1()
         {
@@ -37,20 +38,20 @@ namespace lab3
                 if (i == 127 || i == 151 || i == 159 || i == 172) continue;
                 code[i] = values[i - 32];
             }
-            string host = "127.0.0.1";
+            //host = "127.0.0.1";
             int port = 8888;
-            record($"Äîáðî ïîæàëîâàòü, {username}");
             StreamReader? Reader = null;
             StreamWriter? Writer = null;
             client.Connect(host, port); //ïîäêëþ÷åíèå êëèåíòà
+            record($"Äîáðî ïîæàëîâàòü, {username}");
             Reader = new StreamReader(client.GetStream());
             Writer = new StreamWriter(client.GetStream());
-            writer2 = Writer;
+            netWriter = Writer;
             if (Writer is null || Reader is null) return;
             // çàïóñêàåì íîâûé ïîòîê äëÿ ïîëó÷åíèÿ äàííûõ
             ReceiveMessageAsync(Reader);
-            writer2.WriteLineAsync(username);
-            writer2.FlushAsync();
+            netWriter.WriteLineAsync(username);
+            netWriter.FlushAsync();
         }
 
         private void sendButton_Click(object sender, EventArgs e)
@@ -58,25 +59,18 @@ namespace lab3
             try
             {
                 string input = inputBox.Text;
-                string message = $"{username}: {input}";
                 string output = "";
                 string outputSecond = "";
-                foreach (char c in message)
+                foreach (char c in input)
                 {
                     var myKey = code.FirstOrDefault(x => x.Value == c).Key;
                     output += myKey + " ";
                     outputSecond += Convert.ToString(myKey, 2) + " ";
                 }
-                string[] inputArray = output.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                byte[] data = new byte[inputArray.Length];
-                for (int i = 0; i < data.Length; i++)
-                {
-                    data[i] = Byte.Parse(inputArray[i]);
-                }
-                ;
-                writer2.WriteLineAsync(input);
-                writer2.FlushAsync();
-                record("Âû: "+ input);
+                string message = $"{input} {output} {outputSecond}";
+                netWriter.WriteLineAsync(message);
+                netWriter.FlushAsync();
+                record("Âû: "+ message);
             }
             catch
             {
@@ -98,6 +92,10 @@ namespace lab3
                     string? message = await reader.ReadLineAsync();
                     // åñëè ïóñòîé îòâåò, íè÷åãî íå âûâîäèì íà êîíñîëü
                     if (string.IsNullOrEmpty(message)) continue;
+                    using (StreamWriter writer = new StreamWriter(writePath, true))
+                    {
+                        writer.WriteLine(message);
+                    }
                     record(message);//âûâîä ñîîáùåíèÿ
                 }
                 catch
@@ -105,33 +103,9 @@ namespace lab3
                     break;
                 }
             }
-            //using UdpClient receiver = new UdpClient(localPort);
-            //while (true)
-            //{
-            //    // ïîëó÷àåì äàííûå
-            //    var result = await receiver.ReceiveAsync();
-            //    byte[] inputArray = result.Buffer;
-            //    string output = "";
-            //    string outputSecond = "";
-            //    foreach (byte c in inputArray)
-            //    {
-            //        output += code[c];
-            //    }
-            //    int gol;
-            //    for (int i = IndexOf(inputArray, 32)+1; i < inputArray.Length; i++)
-            //    {
-            //        gol = inputArray[i];
-            //        writer.Write($"{gol} ");
-            //        outputSecond += Convert.ToString(gol, 2) + " ";
-            //    }
-            //    //âûâîäèì ñîîáùåíèå
-            //    writer.WriteLine(outputSecond);
-            //    record(output);
-            //}
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            writer.Close();
             Application.Exit();
         }
         private int IndexOf(byte[] array, byte obj)

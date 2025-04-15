@@ -12,17 +12,18 @@ namespace lab3
 {
     public partial class Form2 : Form
     {
-        StreamWriter writer;
+        string path;
         public Form2()
         {
             InitializeComponent();
             DateTime now = DateTime.Now;
-            writer = new StreamWriter($"{now}.txt".Replace(' ', '_').Replace(':', '-'), false);
+            path = $"{now}.txt".Replace(' ', '_').Replace(':', '-'); 
+            using (StreamWriter writer = new StreamWriter(path, true)) { }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 newForm = new Form1(this, usernameTextBox.Text, writer);
+            Form1 newForm = new Form1(this, usernameTextBox.Text, path, ipTextBox.Text);
             newForm.Show();
         }
 

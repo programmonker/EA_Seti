@@ -31,10 +31,6 @@
             sendButton = new Button();
             inputBox = new RichTextBox();
             historyBox = new RichTextBox();
-            portTextBox = new TextBox();
-            label1 = new Label();
-            ipTextBox = new TextBox();
-            label2 = new Label();
             SuspendLayout();
             // 
             // sendButton
@@ -49,62 +45,26 @@
             // 
             // inputBox
             // 
-            inputBox.Location = new Point(146, 444);
+            inputBox.Location = new Point(12, 444);
             inputBox.Name = "inputBox";
-            inputBox.Size = new Size(281, 38);
+            inputBox.Size = new Size(415, 38);
             inputBox.TabIndex = 5;
             inputBox.Text = "";
             // 
             // historyBox
             // 
-            historyBox.Location = new Point(146, 12);
+            historyBox.Location = new Point(12, 12);
             historyBox.Name = "historyBox";
             historyBox.ReadOnly = true;
-            historyBox.Size = new Size(281, 426);
+            historyBox.Size = new Size(415, 426);
             historyBox.TabIndex = 7;
             historyBox.Text = "";
-            // 
-            // portTextBox
-            // 
-            portTextBox.Location = new Point(12, 220);
-            portTextBox.Name = "portTextBox";
-            portTextBox.Size = new Size(100, 23);
-            portTextBox.TabIndex = 8;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 187);
-            label1.Name = "label1";
-            label1.Size = new Size(129, 30);
-            label1.TabIndex = 9;
-            label1.Text = "Введите порт для \r\nотправки сообщений:";
-            // 
-            // ipTextBox
-            // 
-            ipTextBox.Location = new Point(12, 296);
-            ipTextBox.Name = "ipTextBox";
-            ipTextBox.Size = new Size(100, 23);
-            ipTextBox.TabIndex = 10;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 263);
-            label2.Name = "label2";
-            label2.Size = new Size(129, 30);
-            label2.TabIndex = 11;
-            label2.Text = "Введите ip для \r\nотправки сообщений:";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(439, 529);
-            Controls.Add(label2);
-            Controls.Add(ipTextBox);
-            Controls.Add(label1);
-            Controls.Add(portTextBox);
             Controls.Add(historyBox);
             Controls.Add(inputBox);
             Controls.Add(sendButton);
@@ -113,7 +73,6 @@
             FormClosed += Form1_FormClosed;
             Load += Form1_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -121,9 +80,5 @@
         private Button sendButton;
         private RichTextBox inputBox;
         private RichTextBox historyBox;
-        private TextBox portTextBox;
-        private Label label1;
-        private TextBox ipTextBox;
-        private Label label2;
     }
 }
