@@ -2,7 +2,7 @@ using System.Net;
 using System.Net.Sockets;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace lab2
+namespace lab4
 {
     internal static class Program
     {

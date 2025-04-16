@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Form1.cs" />
+    <Compile Update="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

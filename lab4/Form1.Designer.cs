@@ -1,4 +1,4 @@
-﻿namespace lab2
+﻿namespace lab4
 {
     partial class Form1
     {
@@ -35,6 +35,7 @@
             label1 = new Label();
             ipTextBox = new TextBox();
             label2 = new Label();
+            checkButton = new Button();
             SuspendLayout();
             // 
             // sendButton
@@ -96,11 +97,22 @@
             label2.TabIndex = 11;
             label2.Text = "Введите ip для \r\nотправки сообщений:";
             // 
+            // checkButton
+            // 
+            checkButton.Location = new Point(15, 364);
+            checkButton.Name = "checkButton";
+            checkButton.Size = new Size(75, 23);
+            checkButton.TabIndex = 12;
+            checkButton.Text = "Проверка";
+            checkButton.UseVisualStyleBackColor = true;
+            checkButton.Click += checkButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(439, 529);
+            Controls.Add(checkButton);
             Controls.Add(label2);
             Controls.Add(ipTextBox);
             Controls.Add(label1);
@@ -125,5 +137,6 @@
         private Label label1;
         private TextBox ipTextBox;
         private Label label2;
+        private Button checkButton;
     }
 }
